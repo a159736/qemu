@@ -1936,6 +1936,60 @@ static const CommandDefRec  vm_commands[] =
 /********************************************************************************************/
 /********************************************************************************************/
 /*****                                                                                 ******/
+/*****                       S E N S O R   C O M M A N D S                             ******/
+/*****                                                                                 ******/
+/********************************************************************************************/
+/********************************************************************************************/
+
+static int
+do_sensor_accel( ControlClient  client, char*  args )
+{
+    int x,y,z;
+    sscanf(args,"%d %d %d",&x,&y,&z);
+    control_write( client, "accel %d %d %d\r\n",x,y,z);
+    goldfish_sensor_set_prop(0,x,y,z);
+    return 0;
+}
+
+static int
+do_sensor_compass( ControlClient  client, char*  args )
+{
+    int x,y,z;
+    sscanf(args,"%d %d %d",&x,&y,&z);
+    control_write( client, "compass %d %d %d\r\n",x,y,z);
+    goldfish_sensor_set_prop(1,x,y,z);
+    return 0;
+}
+static int
+do_sensor_orient( ControlClient  client, char*  args )
+{
+    int x,y,z;
+    sscanf(args,"%d %d %d",&x,&y,&z);
+    control_write( client, "orient %d %d %d\r\n",x,y,z);
+    goldfish_sensor_set_prop(2,x,y,z);
+    return 0;
+}
+
+static const CommandDefRec  sensor_commands[] =
+{
+    { "accel", "send an accelerometer update",
+    "'sensor accel x y z' updates x,y and z accelerometer values",
+    NULL, do_sensor_accel, NULL },
+    { "compass", "send a compass update",
+    "'sensor compass x y z' updates x,y and z compass values",
+    NULL, do_sensor_compass, NULL },
+    { "orient", "send an orientation update",
+    "'sensor orient x y z' updates x,y and z orientation values",
+    NULL, do_sensor_orient, NULL },
+
+    { NULL, NULL, NULL, NULL, NULL, NULL }
+};
+
+
+
+/********************************************************************************************/
+/********************************************************************************************/
+/*****                                                                                 ******/
 /*****                             G E O   C O M M A N D S                             ******/
 /*****                                                                                 ******/
 /********************************************************************************************/
@@ -2181,6 +2235,10 @@ static const CommandDefRec   main_commands[] =
     { "window", "manage emulator window",
     "allows you to modify the emulator window\r\n", NULL,
     NULL, window_commands },
+
+    {"sensor", "sensor commands", 
+    "allows you to simulate hardware sensors\r\n", NULL,
+    NULL, sensor_commands },
 
     { NULL, NULL, NULL, NULL, NULL, NULL }
 };

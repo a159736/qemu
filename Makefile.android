@@ -179,6 +179,7 @@ HW_SOURCES := \
     goldfish_timer.c \
     goldfish_trace.c \
     goldfish_tty.c \
+    goldfish_sensors.c \
     msmouse.c \
     pci.c \
     qdev.c \
