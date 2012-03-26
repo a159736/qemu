@@ -36,7 +36,7 @@ it is based on QEMU 0.8.2 with many changes used to support the following featur
     SIGALRM signals to implement timers. this makes for much better timing accuracy
     when using "old" emukated Linux kernels, at the cost of using 100% CPU, even when
     the guest system is idle. This is now disabled since Linux 2.6.21 and beyond use
-    "dynamic ticks" that make this mode un-necessary for Android.
+    "dynamic ticks" that make this mode un-necessary for Android.uishdcuishc
 
 
 it also uses a patched version of LibSDL-1.2.12 which implements the following:
